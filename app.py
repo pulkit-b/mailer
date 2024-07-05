@@ -8,6 +8,7 @@ app = Flask(__name__)
 @app.route('/send-email', methods=['POST'])
 def send_email():
     data = request.json
+    print(data)
     sender_email = "kezaartech@gmail.com"  # Replace with your Gmail address
     sender_password = "wytl kiyd urrn eyns"  # Replace with your Gmail password
     receiver_email = "pulkit.b@outlook.com"
