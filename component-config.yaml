@@ -1,0 +1,64 @@
+apiVersion: choreo.dev/v1alpha1
+kind: Component
+metadata:
+  name: email-sender
+spec:
+  type: HTTP
+  definition:
+    info:
+      title: Email Sender API
+      version: 1.0.0
+      description: API to send emails using Google's SMTP server.
+    paths:
+      /send-email:
+        post:
+          summary: Send an email
+          operationId: sendEmail
+          requestBody:
+            description: Email details
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    to:
+                      type: string
+                      example: "receiver-email@gmail.com"
+                    subject:
+                      type: string
+                      example: "Test Email"
+                    body:
+                      type: string
+                      example: "This is a test email."
+          responses:
+            '200':
+              description: Email sent successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Email sent successfully!"
+            '400':
+              description: Invalid input
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        example: "Missing required fields: 'to', 'subject', 'body'"
+            '500':
+              description: Internal server error
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        example: "Internal server error"
